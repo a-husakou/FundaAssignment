@@ -1,4 +1,5 @@
-using FundaAssignment.TrendingMakelaarApi.App;
+using FundaAssignment.Application.TrendingMakelaarCalculation;
+using FundaAssignment.Application.Common;
 using Microsoft.AspNetCore.Mvc;
 
 namespace FundaAssignment.TrendingMakelaarApi.Controllers

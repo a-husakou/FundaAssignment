@@ -1,6 +1,6 @@
 using System.Text.Json.Serialization;
 
-namespace FundaAssignment.TrendingMakelaarApi.App;
+namespace FundaAssignment.Application.TrendingMakelaarCalculation;
 
 public class FundaListingsDto
 {
@@ -24,3 +24,4 @@ public sealed class PagingInfo
 
     public int HuidigePagina { get; init; }
 }
+

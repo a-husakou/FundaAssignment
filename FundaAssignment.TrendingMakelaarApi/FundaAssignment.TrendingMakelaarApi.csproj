@@ -14,4 +14,9 @@
     <PackageReference Include="Swashbuckle.AspNetCore" Version="6.4.0" />
   </ItemGroup>
 
+  <ItemGroup>
+    <ProjectReference Include="..\FundaAssignment.Application.Common\FundaAssignment.Application.Common.csproj" />
+    <ProjectReference Include="..\FundaAssignment.Application.TrendingMakelaarCalculation\FundaAssignment.Application.TrendingMakelaarCalculation.csproj" />
+  </ItemGroup>
+
 </Project>

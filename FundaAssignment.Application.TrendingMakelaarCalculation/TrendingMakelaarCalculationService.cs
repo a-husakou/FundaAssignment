@@ -1,4 +1,6 @@
-namespace FundaAssignment.TrendingMakelaarApi.App;
+using FundaAssignment.Application.Common;
+
+namespace FundaAssignment.Application.TrendingMakelaarCalculation;
 
 public class TrendingMakelaarCalculationService
 {
@@ -64,3 +66,4 @@ public class TrendingMakelaarCalculationService
         await calculatedResultStore.StoreCalculatedResultAsync(searchTerm, sortedList);
     }
 }
+

@@ -46,3 +46,6 @@ The strategies below are not mutually exclusive and can be combined.
 - A data-engineering perspective: treat the Funda API as a stream of data without filters, index as necessary, and store it in a local DB.
 - Serve user queries from the DB.
 
+
+// TODO mention the updated project structure, it is probably not the most important to create a structure for this size of a project, but since Stephan touched upon separation of concerns, the decision was to demonstrate broader ideas with clean arc
+

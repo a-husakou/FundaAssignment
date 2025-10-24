@@ -1,4 +1,4 @@
-namespace FundaAssignment.TrendingMakelaarApi.App;
+namespace FundaAssignment.Application.Common;
 
 public interface ICalculatedResultStore
 {
@@ -8,3 +8,4 @@ public interface ICalculatedResultStore
     /// </summary>
     Task<IEnumerable<CalculatedMakelaarResult>?> GetCalculatedResultAsync(string searchTerm);
 }
+
