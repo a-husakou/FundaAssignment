@@ -1,0 +1,6 @@
+@FundaAssignment.TrendingMakelaarApi_HostAddress = http://localhost:5136
+
+GET {{FundaAssignment.TrendingMakelaarApi_HostAddress}}/weatherforecast/
+Accept: application/json
+
+###

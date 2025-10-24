@@ -1,0 +1,181 @@
+# Prerequisites
+*.d
+
+# Object files
+*.o
+*.ko
+*.obj
+*.elf
+
+# Linker output
+*.ilk
+*.map
+*.exp
+
+# Precompiled Headers
+*.gch
+*.pch
+
+# Libraries
+*.lib
+*.a
+*.la
+*.lo
+
+# Shared objects (inc. Windows DLLs)
+*.dll
+*.so
+*.so.*
+*.dylib
+
+# Executables
+*.exe
+*.out
+*.app
+*.i*86
+*.x86_64
+*.hex
+
+# Debug files
+*.dSYM/
+*.su
+*.idb
+*.pdb
+
+# Kernel Module Compile Results
+*.mod*
+*.cmd
+.tmp_versions/
+modules.order
+Module.symvers
+Mkfile.old
+dkms.conf
+
+############################################
+# .NET / C#, Visual Studio, VS Code ignores
+############################################
+
+# Build output
+[Bb]in/
+[Oo]bj/
+[Ll]og/
+[Rr]elease/
+[Rr]eleases/
+[Dd]ebug/
+x64/
+x86/
+[Aa][Rr][Mm]/
+[Aa][Rr][Mm]64/
+bld/
+[Bb]uild/
+artifacts/
+[Bb]enchmarkDotNet.Artifacts/
+
+# Visual Studio
+.vs/
+*.user
+*.userosscache
+*.suo
+*.sln.docstates
+*.VC.db
+*.VC.opendb
+*.opendb
+ipch/
+*.iobj
+*.ipdb
+*_i.c
+*_p.c
+*_h.h
+*.pgc
+*.pgd
+*.vsp
+*.vspx
+
+# Rider / ReSharper / CodeRush
+_ReSharper*/
+*.[Rr]e[Ss]harper
+*.DotSettings.user
+.idea/
+*.sln.iml
+
+# NuGet
+*.nupkg
+*.snupkg
+packages/
+!packages/build/
+!packages/repositories.config
+.nuget/NuGet.exe
+.nuget/packages.config
+
+# .NET tooling and publish artifacts
+project.lock.json
+project.fragment.lock.json
+AppPackages/
+BundleArtifacts/
+_Pvt_Extensions/
+*.PublishSettings
+PublishProfiles/
+
+# Test results / coverage
+[Tt]est[Rr]esult*/
+[Tt]est[Rr]esults*/
+TestResults/
+*.trx
+*.coverage
+*.coveragexml
+
+# Entity Framework / SQL Server localdb
+*.mdf
+*.ldf
+
+# VS Code
+.vscode/*
+!.vscode/settings.json
+!.vscode/tasks.json
+!.vscode/launch.json
+!.vscode/extensions.json
+!.vscode/*.code-snippets
+
+# Misc
+*.cache
+*.log
+*.svclog
+*.psess
+*.vspf
+*.tlog
+*.tmp
+
+############################################
+# OS-level ignores
+############################################
+
+# Windows
+Thumbs.db
+Thumbs.db:encryptable
+ehthumbs.db
+Desktop.ini
+$RECYCLE.BIN/
+*.cab
+*.msi
+*.msm
+*.msp
+*.lnk
+
+# macOS
+.DS_Store
+.AppleDouble
+.LSOverride
+Icon?
+.Spotlight-V100
+.Trashes
+.AppleDB
+.AppleDesktop
+Network Trash Folder
+Temporary Items
+.apdisk
+
+# Linux
+*~
+.fuse_hidden*
+.Trash-*
+.nfs*
