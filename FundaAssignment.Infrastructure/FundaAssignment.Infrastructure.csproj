@@ -8,6 +8,7 @@
 
   <ItemGroup>
     <ProjectReference Include="..\Funda.Common\Funda.Common.csproj" />
+    <ProjectReference Include="..\FundaAssignment.Application.Common\FundaAssignment.Application.Common.csproj" />
     <ProjectReference Include="..\FundaAssignment.Application.TrendingMakelaarCalculation\FundaAssignment.Application.TrendingMakelaarCalculation.csproj" />
   </ItemGroup>
 

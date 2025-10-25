@@ -1,4 +1,5 @@
 using FundaAssignment.Application.Common;
+using Microsoft.Extensions.Options;
 
 namespace FundaAssignment.Application.TrendingMakelaarCalculation;
 
@@ -9,13 +10,14 @@ public class TrendingMakelaarCalculationService
     private readonly FilterConfig filterConfig;
     private readonly CalculationConfig calculationConfig;
 
-    public TrendingMakelaarCalculationService(IFundaApiClient fundaApiClient, 
+    public TrendingMakelaarCalculationService(
+        IFundaApiClient fundaApiClient,
         ICalculatedResultStore calculatedResultStore,
-        FilterConfig filterConfig,
-        CalculationConfig calculationConfig)
+        IOptions<FilterConfig> filterConfig,
+        IOptions<CalculationConfig> calculationConfig)
     {
-        this.filterConfig = filterConfig;
-        this.calculationConfig = calculationConfig;
+        this.filterConfig = filterConfig.Value;
+        this.calculationConfig = calculationConfig.Value;
         this.fundaApiClient = fundaApiClient;
         this.calculatedResultStore = calculatedResultStore;
     }
