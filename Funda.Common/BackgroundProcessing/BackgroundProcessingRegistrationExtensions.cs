@@ -40,7 +40,16 @@ public static class BackgroundProcessingRegistrationExtensions
         {
             throw new InvalidOperationException($"Invalid TimeSpan format for 'Interval' in background processor '{typeof(TProcessor).Name}': '{intervalString}'.");
         }
+        var performInitString = configurationSection["PerformInitializationRun"];
+        if (string.IsNullOrWhiteSpace(performInitString))
+        {
+            throw new InvalidOperationException($"Missing required configuration 'PerformInitializationRun' for background processor '{typeof(TProcessor).Name}'.");
+        }
+        if (!bool.TryParse(performInitString, out var performInitializationRun))
+        {
+            throw new InvalidOperationException($"Invalid boolean format for 'PerformInitializationRun' in background processor '{typeof(TProcessor).Name}': '{performInitString}'.");
+        }
 
-        return services.AddBackgroundProcessor<TProcessor>(interval, true);
+        return services.AddBackgroundProcessor<TProcessor>(interval, performInitializationRun);
     }
 }

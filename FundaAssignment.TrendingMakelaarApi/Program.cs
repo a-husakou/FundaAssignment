@@ -1,5 +1,6 @@
 using FundaAssignment.Infrastructure;
- 
+using Funda.Common.Warmup.ShortCircuit;
+
 namespace FundaAssignment.TrendingMakelaarApi
 {
     public class Program
@@ -28,6 +29,9 @@ namespace FundaAssignment.TrendingMakelaarApi
             }
 
             app.UseHttpsRedirection();
+
+            // Short-circuit all requests until warm-up completes (allows /health and /swagger)
+            object value = app.UseWarmupShortCircuit();
 
             app.UseAuthorization();
 

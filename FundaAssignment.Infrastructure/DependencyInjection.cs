@@ -1,4 +1,5 @@
 using Funda.Common.BackgroundProcessing;
+using Funda.Common.Warmup;
 using FundaAssignment.Application.Common;
 using FundaAssignment.Application.TrendingMakelaarCalculation;
 using Microsoft.Extensions.Configuration;
@@ -10,12 +11,12 @@ public static class DependencyInjection
 {
     public static IServiceCollection AddInfrastructure(this IServiceCollection services, IConfiguration configuration)
     {
-        // Register application-layer services and configs
         services.AddApplicationCommon(configuration);
         services.AddTrendingMakelaarCalculation(configuration);
 
         services.AddBackgroundProcessor<RefreshCalculatedMakelaarDataBackgroundProcess>(
             configuration.GetSection("BackgroundProcessing:RefreshCalculatedMakelaarData"));
+        services.AddWarmup(configurator => configurator.AddRequiredProcessor<RefreshCalculatedMakelaarDataBackgroundProcess>());
 
         return services;
     }

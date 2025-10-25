@@ -18,6 +18,7 @@ public static class WarmupProcessorsRegistrationExtensions
             var initState = sp.GetRequiredService<IInitializationState>();
             return new WarmupCoordinator(initState, configurator.RequiredProcessors);
         });
+        
         return services;
     }
 }
