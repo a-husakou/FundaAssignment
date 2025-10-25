@@ -26,7 +26,7 @@ namespace FundaAssignment.TrendingMakelaarApi.Controllers
             }
 
             // unrealistic unless no data on funda at all
-            var result = await calculatedResultStore.GetCalculatedResultAsync(searchTerm);
+            var result = await calculatedResultStore.GetCalculatedDataAsync(searchTerm);
             if (result == null)
             {
                 return NotFound($"No calculated result found for filter: {filter}");

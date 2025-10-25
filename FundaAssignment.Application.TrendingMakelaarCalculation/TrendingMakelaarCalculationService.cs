@@ -7,22 +7,31 @@ public class TrendingMakelaarCalculationService
     private readonly IFundaApiClient fundaApiClient;
     private readonly ICalculatedResultStore calculatedResultStore;
     private readonly FilterConfig filterConfig;
+    private readonly CalculationConfig calculationConfig;
 
     public TrendingMakelaarCalculationService(IFundaApiClient fundaApiClient, 
         ICalculatedResultStore calculatedResultStore,
-        FilterConfig filterConfig)
+        FilterConfig filterConfig,
+        CalculationConfig calculationConfig)
     {
         this.filterConfig = filterConfig;
+        this.calculationConfig = calculationConfig;
         this.fundaApiClient = fundaApiClient;
         this.calculatedResultStore = calculatedResultStore;
     }
 
     // TODO scheduling via background service during warm up and then every configured interval according to appsettingss
-    public async Task RefreshTrendingMakelaarDataAsync()
+    // TODO make sure warm up runs before any background services start
+    public async Task RefreshTrendingMakelaarDataAsync(CancellationToken cancellationToken)
     {
         foreach (var searchTerm in filterConfig.FilterSearchTerms)
         {
-            await CalculateAndStoreTrendingMakelaarAsync(searchTerm);
+            var data = await calculatedResultStore.GetCalculatedDataAsync(searchTerm);
+            if (DateTime.UtcNow.Subtract(data.CalculatedAtUtc) > calculationConfig.RefreshInterval)
+            {
+                cancellationToken.ThrowIfCancellationRequested();
+                await CalculateAndStoreTrendingMakelaarAsync(searchTerm);
+            }
         }
     }
 
@@ -56,6 +65,7 @@ public class TrendingMakelaarCalculationService
             lastPageFetched = pageNumber++ == fundaListingsDto.Paging.AantalPaginas;
         }
 
+        // TODO add metrics for listing count per makelaar
         var sortedList = new SortedList<int, MakelaarInfo>();
         foreach (var pair in makelaarCountMap)
         {
@@ -63,7 +73,6 @@ public class TrendingMakelaarCalculationService
         }
 
         // TODO add the timestamp of calculation to be able to monitor staleness of data and skip it during warm up if needed
-        await calculatedResultStore.StoreCalculatedResultAsync(searchTerm, sortedList);
+        await calculatedResultStore.StoreMakelaarItemsAsync(searchTerm, sortedList);
     }
 }
-

@@ -1,10 +1,9 @@
 namespace FundaAssignment.Application.Common
 {
-    public class CalculatedMakelaarResult
+    public class CalculatedMakelaarItem
     {
         public MakelaarInfo Makelaar { get; set; }
         public int TotalListings { get; set; }
-        public DateTime CalculatedAtUtc { get; set; }
     }
 }
 

@@ -2,10 +2,10 @@ namespace FundaAssignment.Application.Common;
 
 public interface ICalculatedResultStore
 {
-    Task StoreCalculatedResultAsync(string searchTerm, SortedList<int, MakelaarInfo> result);
+    Task StoreMakelaarItemsAsync(string searchTerm, SortedList<int, MakelaarInfo> items);
     /// <summary>
     /// Retrieves the sorted calculated makelaar results for a given search term.
     /// </summary>
-    Task<IEnumerable<CalculatedMakelaarResult>?> GetCalculatedResultAsync(string searchTerm);
+    Task<CalculatedMakelaarData?> GetCalculatedDataAsync(string searchTerm);
 }
 

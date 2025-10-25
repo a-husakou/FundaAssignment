@@ -8,13 +8,19 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "SolutionItems", "SolutionIt
 		Readme.md = Readme.md
 	EndProjectSection
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "FundaAssignment.TrendingMakelaarApi", "FundaAssignment.TrendingMakelaarApi\FundaAssignment.TrendingMakelaarApi.csproj", "{F6E5D2C2-BE43-4A47-8631-F59EFCCD6EBB}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "FundaAssignment.TrendingMakelaarApi", "FundaAssignment.TrendingMakelaarApi\FundaAssignment.TrendingMakelaarApi.csproj", "{F6E5D2C2-BE43-4A47-8631-F59EFCCD6EBB}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "FundaAssignment.Application.Common", "FundaAssignment.Application.Common\FundaAssignment.Application.Common.csproj", "{5CF58C7E-9B8F-418B-BC1E-6D9CBA986BA0}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "FundaAssignment.Application.Common", "FundaAssignment.Application.Common\FundaAssignment.Application.Common.csproj", "{5CF58C7E-9B8F-418B-BC1E-6D9CBA986BA0}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "FundaAssignment.Application.TrendingMakelaarCalculation", "FundaAssignment.Application.TrendingMakelaarCalculation\FundaAssignment.Application.TrendingMakelaarCalculation.csproj", "{65C5F662-5E23-4F14-83DF-5D90EF018B47}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "FundaAssignment.Application.TrendingMakelaarCalculation", "FundaAssignment.Application.TrendingMakelaarCalculation\FundaAssignment.Application.TrendingMakelaarCalculation.csproj", "{65C5F662-5E23-4F14-83DF-5D90EF018B47}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "FundaAssignment.Infrastructure.Application", "FundaAssignment.Infrastructure.Application\FundaAssignment.Infrastructure.Application.csproj", "{BA736E1D-C46F-4F86-80A4-5A846B8C8D54}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Funda.Common", "Funda.Common\Funda.Common.csproj", "{C0051E6C-300F-4BD1-A8B9-5CA6A9EBE194}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "FundaAssignment.Infrastructure", "FundaAssignment.Infrastructure\FundaAssignment.Infrastructure.csproj", "{5F12003F-5DB9-46FD-8DFC-043B3A593583}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "src", "src", "{762E9584-79A4-4CCA-940B-560E00A45800}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "external", "external", "{FA376A52-113E-488D-BC25-F541BB80932F}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -34,13 +40,24 @@ Global
 		{65C5F662-5E23-4F14-83DF-5D90EF018B47}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{65C5F662-5E23-4F14-83DF-5D90EF018B47}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{65C5F662-5E23-4F14-83DF-5D90EF018B47}.Release|Any CPU.Build.0 = Release|Any CPU
-		{BA736E1D-C46F-4F86-80A4-5A846B8C8D54}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{BA736E1D-C46F-4F86-80A4-5A846B8C8D54}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{BA736E1D-C46F-4F86-80A4-5A846B8C8D54}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{BA736E1D-C46F-4F86-80A4-5A846B8C8D54}.Release|Any CPU.Build.0 = Release|Any CPU
+		{C0051E6C-300F-4BD1-A8B9-5CA6A9EBE194}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{C0051E6C-300F-4BD1-A8B9-5CA6A9EBE194}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{C0051E6C-300F-4BD1-A8B9-5CA6A9EBE194}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{C0051E6C-300F-4BD1-A8B9-5CA6A9EBE194}.Release|Any CPU.Build.0 = Release|Any CPU
+		{5F12003F-5DB9-46FD-8DFC-043B3A593583}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{5F12003F-5DB9-46FD-8DFC-043B3A593583}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{5F12003F-5DB9-46FD-8DFC-043B3A593583}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{5F12003F-5DB9-46FD-8DFC-043B3A593583}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(NestedProjects) = preSolution
+		{F6E5D2C2-BE43-4A47-8631-F59EFCCD6EBB} = {762E9584-79A4-4CCA-940B-560E00A45800}
+		{5CF58C7E-9B8F-418B-BC1E-6D9CBA986BA0} = {762E9584-79A4-4CCA-940B-560E00A45800}
+		{65C5F662-5E23-4F14-83DF-5D90EF018B47} = {762E9584-79A4-4CCA-940B-560E00A45800}
+		{C0051E6C-300F-4BD1-A8B9-5CA6A9EBE194} = {FA376A52-113E-488D-BC25-F541BB80932F}
+		{5F12003F-5DB9-46FD-8DFC-043B3A593583} = {762E9584-79A4-4CCA-940B-560E00A45800}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {90662225-6559-4BE5-ACE6-2865531B5F0A}

@@ -47,5 +47,5 @@ The strategies below are not mutually exclusive and can be combined.
 - Serve user queries from the DB.
 
 
-// TODO mention the updated project structure, it is probably not the most important to create a structure for this size of a project, but since Stephan touched upon separation of concerns, the decision was to demonstrate broader ideas with clean arc
-
+// TODO mention the updated project structure, mention that keeping in mind the size of the solution this split does not give the best value it gives for a larger structure ,but since Stephan touched upon separation of concerns, the decision was to demonstrate broader ideas with clean arc
+// TODO add information that external folder is meant to be a separate repository, for simplicity it is a part of a current solution
