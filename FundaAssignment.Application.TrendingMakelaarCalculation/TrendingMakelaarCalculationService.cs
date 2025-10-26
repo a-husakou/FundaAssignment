@@ -22,8 +22,6 @@ public class TrendingMakelaarCalculationService
         this.calculatedResultStore = calculatedResultStore;
     }
 
-    // TODO scheduling via background service during warm up and then every configured interval according to appsettingss
-    // TODO make sure warm up runs before any background services start
     public async Task RefreshTrendingMakelaarDataAsync(CancellationToken cancellationToken)
     {
         foreach (var searchTerm in filterConfig.FilterSearchTerms)
@@ -47,8 +45,6 @@ public class TrendingMakelaarCalculationService
 
         while (!lastPageFetched)
         {
-            // TODO Make 429 to be part of HTTP client handling with retry and backoff (external lib?) so it is not propogated here
-            // TODO Other problems should be captured and when hosts detects that Refresh fails, it needs to alert and schedule retry sooner than regular interval
             var fundaListingsDto = await fundaApiClient.GetListingsBySearchTermAsync(searchTerm, pageNumber);
 
             foreach (var listing in fundaListingsDto.Objects)
@@ -68,13 +64,17 @@ public class TrendingMakelaarCalculationService
         }
 
         // TODO add metrics for listing count per makelaar
-        var sortedList = new SortedList<int, MakelaarInfo>();
+        var sortedList = new SortedList<int, List<MakelaarInfo>>(Comparer<int>.Create((a, b) => b.CompareTo(a)));
         foreach (var pair in makelaarCountMap)
         {
-            sortedList.Add(pair.Value, pair.Key);
+            if (!sortedList.TryGetValue(pair.Value, out var list))
+            {
+                list = new List<MakelaarInfo>();
+                sortedList[pair.Value] = list;
+            }
+            list.Add(pair.Key);
         }
 
-        // TODO add the timestamp of calculation to be able to monitor staleness of data and skip it during warm up if needed
         await calculatedResultStore.StoreMakelaarItemsAsync(searchTerm, sortedList);
     }
 }

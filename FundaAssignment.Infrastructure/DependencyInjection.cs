@@ -18,6 +18,7 @@ public static class DependencyInjection
         {
             throw new InvalidOperationException("FundaApi:BaseUrl must be an absolute URL.");
         }
+        services.AddSingleton<ICalculatedResultStore, InMemoryCalculatedResultStore>();
         services
             .AddOptions<FundaApiClientRetryOptions>()
             .Bind(configuration.GetSection("FundaApi:Retry"))
