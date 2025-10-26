@@ -2,11 +2,9 @@ using System.Text.Json.Serialization;
 
 namespace FundaAssignment.Application.TrendingMakelaarCalculation;
 
-public class FundaListingsDto
+public class FundaListingsResult
 {
-    // TODO Use fluent notation
-    [JsonPropertyName("Objects")]
-    public List<ListingData> Listings { get; init; }
+    public List<ListingData> Objects { get; init; }
 
     public PagingInfo Paging { get; init; }
 }

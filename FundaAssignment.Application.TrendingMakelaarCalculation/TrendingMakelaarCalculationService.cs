@@ -51,7 +51,7 @@ public class TrendingMakelaarCalculationService
             // TODO Other problems should be captured and when hosts detects that Refresh fails, it needs to alert and schedule retry sooner than regular interval
             var fundaListingsDto = await fundaApiClient.GetListingsBySearchTermAsync(searchTerm, pageNumber);
 
-            foreach (var listing in fundaListingsDto.Listings)
+            foreach (var listing in fundaListingsDto.Objects)
             {
                 var makelaarInfo = new MakelaarInfo(listing.MakelaarId, listing.MakelaarNaam);
                 if (makelaarCountMap.ContainsKey(makelaarInfo))
