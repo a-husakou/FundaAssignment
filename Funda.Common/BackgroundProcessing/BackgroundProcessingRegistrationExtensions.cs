@@ -2,6 +2,7 @@ using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.DependencyInjection.Extensions;
 using Microsoft.Extensions.Hosting;
+using System.ComponentModel.DataAnnotations;
 
 namespace Funda.Common.BackgroundProcessing;
 
@@ -10,7 +11,8 @@ public static class BackgroundProcessingRegistrationExtensions
     public static IServiceCollection AddBackgroundProcessor<TProcessor>(
         this IServiceCollection services,
         TimeSpan interval,
-        bool performInitializationRun)
+        bool performInitializationRun,
+        BackgroundRetryOptions? retryOptions = null)
         where TProcessor : class, IBackgroundProcessor
     {
         services.AddTransient<TProcessor>();
@@ -20,7 +22,7 @@ public static class BackgroundProcessingRegistrationExtensions
         {
             var logger = sp.GetRequiredService<Microsoft.Extensions.Logging.ILogger<ScheduledBackgroundProcessorHostedService<TProcessor>>>();
             var initCoordinator = sp.GetRequiredService<BackgroundInitializationCoordinator>();
-            return new ScheduledBackgroundProcessorHostedService<TProcessor>(sp, interval, performInitializationRun, initCoordinator, logger);
+            return new ScheduledBackgroundProcessorHostedService<TProcessor>(sp, interval, performInitializationRun, initCoordinator, logger, retryOptions);
         });
 
         return services;
@@ -50,6 +52,19 @@ public static class BackgroundProcessingRegistrationExtensions
             throw new InvalidOperationException($"Invalid boolean format for 'PerformInitializationRun' in background processor '{typeof(TProcessor).Name}': '{performInitString}'.");
         }
 
-        return services.AddBackgroundProcessor<TProcessor>(interval, performInitializationRun);
+        // Optional retry configuration via binding + attribute validation
+        BackgroundRetryOptions? retry = null;
+        var retrySection = configurationSection.GetSection("Retry");
+        if (retrySection.Exists())
+        {
+            retry = retrySection.Get<BackgroundRetryOptions>();
+            if (retry != null)
+            {
+                var ctx = new ValidationContext(retry);
+                Validator.ValidateObject(retry, ctx, validateAllProperties: true);
+            }
+        }
+
+        return services.AddBackgroundProcessor<TProcessor>(interval, performInitializationRun, retry);
     }
 }
