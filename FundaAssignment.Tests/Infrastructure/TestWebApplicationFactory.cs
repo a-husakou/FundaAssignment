@@ -7,12 +7,31 @@ using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Logging;
 using RichardSzalay.MockHttp;
 using FundaAssignment.TrendingMakelaarApi;
-using FundaAssignment.Infrastructure;
+using Microsoft.Extensions.Http;
 
 namespace FundaAssignment.Tests.Infrastructure;
 
 public class TestWebApplicationFactory : WebApplicationFactory<Program>
 {
+    public WebApplicationFactory<Program> WithMockHttp(MockHttpMessageHandler mock)
+    {
+        return this.WithWebHostBuilder(builder =>
+        {
+            builder.ConfigureServices(services =>
+            {
+                services.AddSingleton(mock);
+                services.PostConfigure<HttpClientFactoryOptions>(typeof(IFundaApiClient).FullName!, options =>
+                {
+                    options.HttpMessageHandlerBuilderActions.Add(b =>
+                    {
+                        var m = b.Services.GetRequiredService<MockHttpMessageHandler>();
+                        b.PrimaryHandler = m;
+                    });
+                });
+            });
+        });
+    }
+
     protected override void ConfigureWebHost(IWebHostBuilder builder)
     {
         builder.UseEnvironment("Test");
@@ -34,18 +53,7 @@ public class TestWebApplicationFactory : WebApplicationFactory<Program>
             // Set env vars used by configuration (both the wanted key and the actual config key)
             Environment.SetEnvironmentVariable("API-KEY", "TEST");
             Environment.SetEnvironmentVariable("FundaApi__ApiKey", "TEST");
-
-            // Keep hosted services enabled so warmup/background processing can run during tests.
-            // Intervals are shortened via appsettings.Test.json to keep tests fast.
-
-            // Provide a Mock HTTP handler for external HTTP calls (IFundaApiClient)
-            var mockHttp = new MockHttpMessageHandler();
-            services.AddSingleton(mockHttp);
-
-            // Re-register the typed client to use our mock handler as primary
-            services.AddHttpClient<IFundaApiClient, FundaApiClient>()
-                .ConfigurePrimaryHttpMessageHandler(sp => sp.GetRequiredService<MockHttpMessageHandler>())
-                .AddHttpMessageHandler<RateLimitRetryHandler>();
+            // Do not re-register IFundaApiClient here to keep production pipeline intact.
         });
     }
 }
