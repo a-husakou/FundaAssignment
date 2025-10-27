@@ -1,6 +1,6 @@
 # Funda Assignment – Solution Guide
 
-See also: [docs/AssignmentAnalysis.md](docs/AssignmentAnalysis.md) for the original analysis.
+See also: [AssignmentAnalysis.md](docs/AssignmentAnalysis.md) for the original analysis.
 
 ## Solution Structure
 The main solution follows a Clean Architecture organization (`/src` folder) and includes the following projects:
