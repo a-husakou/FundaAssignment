@@ -8,6 +8,7 @@ using Microsoft.Extensions.Logging;
 using RichardSzalay.MockHttp;
 using FundaAssignment.TrendingMakelaarApi;
 using Microsoft.Extensions.Http;
+using FundaAssignment.Infrastructure;
 
 namespace FundaAssignment.Tests.Infrastructure;
 
@@ -20,14 +21,22 @@ public class TestWebApplicationFactory : WebApplicationFactory<Program>
             builder.ConfigureServices(services =>
             {
                 services.AddSingleton(mock);
-                services.PostConfigure<HttpClientFactoryOptions>(typeof(IFundaApiClient).FullName!, options =>
+
+                void ConfigurePrimaryHandler(string name) 
                 {
-                    options.HttpMessageHandlerBuilderActions.Add(b =>
+                    services.PostConfigure<HttpClientFactoryOptions>(name, opt => 
                     {
-                        var m = b.Services.GetRequiredService<MockHttpMessageHandler>();
-                        b.PrimaryHandler = m;
-                    });
-                });
+                        opt.HttpMessageHandlerBuilderActions.Add(builder => 
+                        {
+                            var mockHanlder = builder.Services.GetRequiredService<MockHttpMessageHandler>();
+                            builder.PrimaryHandler = mockHanlder;
+                        });
+                    })
+                ;}
+                ConfigurePrimaryHandler(typeof(IFundaApiClient).Name);
+                ConfigurePrimaryHandler(typeof(IFundaApiClient).FullName!);
+                ConfigurePrimaryHandler(typeof(FundaApiClient).Name);
+                ConfigurePrimaryHandler(typeof(FundaApiClient).FullName!);
             });
         });
     }
@@ -45,7 +54,7 @@ public class TestWebApplicationFactory : WebApplicationFactory<Program>
 
         builder.ConfigureAppConfiguration((context, config) =>
         {
-            config.AddJsonFile(Path.Combine(AppContext.BaseDirectory, "appsettings.Test.json"), optional: true, reloadOnChange: false);
+            config.AddJsonFile(Path.Combine(AppContext.BaseDirectory, "appsettings.Test.json"), optional: false, reloadOnChange: false);
         });
 
         builder.ConfigureServices(services =>
@@ -57,3 +66,6 @@ public class TestWebApplicationFactory : WebApplicationFactory<Program>
         });
     }
 }
+
+
+
