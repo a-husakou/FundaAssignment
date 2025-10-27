@@ -21,7 +21,7 @@ public class FundaApiClient : IFundaApiClient
 
     public async Task<FundaListingsResult> GetListingsBySearchTermAsync(string searchTerm, int pageNumber)
     {
-        var requestUri = "?type=koop&zo={searchTerm}&page={pageNumber}&pagesize={PageSize}";
+        var requestUri = $"?type=koop&zo={searchTerm}&page={pageNumber}&pagesize={PageSize}";
         var result = await httpClient.GetFromJsonAsync<FundaListingsResult>(requestUri, JsonOptions);
         return result!;
     }

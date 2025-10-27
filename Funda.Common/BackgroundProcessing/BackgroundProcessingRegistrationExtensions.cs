@@ -33,7 +33,7 @@ public static class BackgroundProcessingRegistrationExtensions
         IConfiguration configurationSection)
         where TProcessor : class, IBackgroundProcessor
     {
-        var intervalString = configurationSection["Interval"]; // expected format: HH:mm:ss
+        var intervalString = configurationSection["Interval"];
         if (string.IsNullOrWhiteSpace(intervalString))
         {
             throw new InvalidOperationException($"Missing required configuration 'Interval' for background processor '{typeof(TProcessor).Name}'.");

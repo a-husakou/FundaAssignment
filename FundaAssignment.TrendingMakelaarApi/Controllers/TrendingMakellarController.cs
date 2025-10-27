@@ -1,6 +1,7 @@
 using FundaAssignment.Application.TrendingMakelaarCalculation;
 using FundaAssignment.Application.Common;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.Extensions.Options;
 
 namespace FundaAssignment.TrendingMakelaarApi.Controllers
 {
@@ -11,9 +12,9 @@ namespace FundaAssignment.TrendingMakelaarApi.Controllers
         private FilterConfig filterConfig;
         private ICalculatedResultStore calculatedResultStore;
 
-        public TrendingMakelaarController(FilterConfig filterConfig, ICalculatedResultStore calculatedResultStore)
+        public TrendingMakelaarController(IOptions<FilterConfig> filterConfig, ICalculatedResultStore calculatedResultStore)
         {
-            this.filterConfig = filterConfig;
+            this.filterConfig = filterConfig.Value;
             this.calculatedResultStore = calculatedResultStore;
         }
 

@@ -57,3 +57,5 @@ The strategies below are not mutually exclusive and can be combined.
 // TODO background processor handle execptions handling with backoff and logging
 
 // TODO mention coupling of ApiClient to deserialization (deserialization format + deserialization settings), it is possible to extract content serialization under a separate interface and being able to switch between serialiazation types without a need for modyfying ApiClients, and I would respect a company wide choice in doing that, but for this assignment, I don't want to introduce additional complexity, so sticking to JSON
+
+//TODO in Funda.Common readme, mention that tests are not provided as they are expected to be part of external lib (although existing tests partially validate the logic)
