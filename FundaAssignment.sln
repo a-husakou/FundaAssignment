@@ -5,7 +5,9 @@ VisualStudioVersion = 17.8.34330.188
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "SolutionItems", "SolutionItems", "{AF96E157-CB6C-4D2E-B560-914620A43F25}"
 	ProjectSection(SolutionItems) = preProject
+		docs\AssignmentAnalysis.md = docs\AssignmentAnalysis.md
 		Readme.md = Readme.md
+		docs\SolutionGuide.md = docs\SolutionGuide.md
 	EndProjectSection
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "FundaAssignment.TrendingMakelaarApi", "FundaAssignment.TrendingMakelaarApi\FundaAssignment.TrendingMakelaarApi.csproj", "{F6E5D2C2-BE43-4A47-8631-F59EFCCD6EBB}"

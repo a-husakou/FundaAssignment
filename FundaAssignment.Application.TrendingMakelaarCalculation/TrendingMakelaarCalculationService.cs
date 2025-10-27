@@ -36,7 +36,6 @@ public class TrendingMakelaarCalculationService
         }
     }
 
-    // TODO add to readme an explanation that this method will be awaited for couple of minutes (3 to be exact) and that it executes in the background
     // Intermediary results are kept in memory to keep things simple, scaling to multiple deployments is not needed as we serve only single fetch endpoint from cache/quick db, so a single server can already support numerous sceanarios
     public async Task CalculateAndStoreTrendingMakelaarAsync(string searchTerm)
     {

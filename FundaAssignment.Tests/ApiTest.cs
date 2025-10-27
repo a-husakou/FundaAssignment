@@ -34,7 +34,7 @@ public class ApiTest : IClassFixture<TestWebApplicationFactory>
     }
 
     [Fact]
-    public async Task ResultCalculation_ShouldNotBeAffectedByFundaApiRateLimiting()
+    public async Task ResultCalculation_ShouldRespectPagingAndRateLimiting()
     {
         var mockHttp = CreatePreconfiguredHandler();
         mockHttp.Expect(HttpMethod.Get, "*")
@@ -106,6 +106,7 @@ public class ApiTest : IClassFixture<TestWebApplicationFactory>
 
     private MockHttpMessageHandler CreatePreconfiguredHandler()
     {
+        // for /amsterdam/tuin filter
         var mockHttp = new MockHttpMessageHandler();
         mockHttp.Fallback
             .RespondWith(builder => builder

@@ -4,7 +4,8 @@ using Microsoft.Extensions.Options;
 
 namespace FundaAssignment.Infrastructure;
 
-// This handler could go to Funda.Common.Http (or similar) if needed elsewhere
+// This handler could go to Funda.Common.Http (or similar) if needed elsewhere,
+// for now it has a specific quirk from FundaAPI to interpret 401 as rate limited
 public class RateLimitRetryHandler : DelegatingHandler
 {
     private readonly TimeSpan rateLimitDelay;
@@ -23,7 +24,7 @@ public class RateLimitRetryHandler : DelegatingHandler
         {
             var response = await base.SendAsync(request, cancellationToken);
 
-            if (response.StatusCode != (HttpStatusCode)429)
+            if (response.StatusCode != (HttpStatusCode)429 && response.StatusCode != (HttpStatusCode)401)
             {
                 return response;
             }
