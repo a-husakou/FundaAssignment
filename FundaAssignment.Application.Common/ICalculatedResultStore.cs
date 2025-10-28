@@ -6,5 +6,5 @@ public interface ICalculatedResultStore
     /// <summary>
     /// Retrieves the sorted calculated makelaar results for a given search term.
     /// </summary>
-    Task<CalculatedMakelaarData?> GetCalculatedDataAsync(string searchTerm);
+    Task<CalculatedMakelaarData?> GetCalculatedDataAsync(string searchTerm, int limit);
 }

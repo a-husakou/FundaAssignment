@@ -7,6 +7,7 @@ using FundaAssignment.Tests.Utils;
 using Xunit.Abstractions;
 using System.Net.Http.Json;
 using FundaAssignment.Application.Common;
+using FundaAssignment.TrendingMakelaarApi.Controllers;
 
 namespace FundaAssignment.Tests;
 
@@ -89,6 +90,26 @@ public class ApiTest : IClassFixture<TestWebApplicationFactory>
         {
             calculatedData.DescendingSortedItems.Should().HaveCount(1);
             calculatedData.DescendingSortedItems.Should().Contain(x => x.Makelaar.Name == "Makelaar A" && x.TotalListings == 2);
+        });
+    }
+
+    [Fact]
+    public async Task ShouldReturnLimitedTopResult()
+    {
+        string[] listings = Enumerable.Range(1, TrendingMakelaarController.ItemsLimit + 1)
+            .Select(x => $"Makelaar {x}").ToArray();
+
+        var mockHttp = CreatePreconfiguredHandler();
+        mockHttp.Expect(HttpMethod.Get, "*")
+            .WithQueryString("zo", "/amsterdam")
+            .RespondWith(builder => builder
+                .WithTotalPages(1)
+                .AddListings(listings));
+
+        var client = factory.WithMockHttp(mockHttp).CreateClient();
+        await AssertSuccessfulCalculation(client, calculatedData =>
+        {
+            calculatedData.DescendingSortedItems.Should().HaveCount(TrendingMakelaarController.ItemsLimit);
         });
     }
 

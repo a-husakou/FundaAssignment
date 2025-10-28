@@ -1,4 +1,3 @@
-using FundaAssignment.Application.TrendingMakelaarCalculation;
 using FundaAssignment.Application.Common;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Options;
@@ -9,6 +8,9 @@ namespace FundaAssignment.TrendingMakelaarApi.Controllers
     [Route("[controller]")]
     public class TrendingMakelaarController : ControllerBase
     {
+        // this can become an endpoint input argument
+        public const int ItemsLimit = 10; 
+
         private FilterConfig filterConfig;
         private ICalculatedResultStore calculatedResultStore;
 
@@ -27,7 +29,7 @@ namespace FundaAssignment.TrendingMakelaarApi.Controllers
             }
 
             // unrealistic unless no data on funda at all
-            var result = await calculatedResultStore.GetCalculatedDataAsync(searchTerm);
+            var result = await calculatedResultStore.GetCalculatedDataAsync(searchTerm, ItemsLimit);
             if (result == null)
             {
                 return NotFound($"No calculated result found for filter: {filter}");

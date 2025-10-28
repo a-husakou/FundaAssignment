@@ -35,9 +35,17 @@ public class InMemoryCalculatedResultStore : ICalculatedResultStore
         return Task.CompletedTask;
     }
 
-    public Task<CalculatedMakelaarData?> GetCalculatedDataAsync(string searchTerm)
+    public Task<CalculatedMakelaarData?> GetCalculatedDataAsync(string searchTerm, int limit)
     {
         store.TryGetValue(searchTerm, out var data);
+        if (data != null)
+        {
+            data = new CalculatedMakelaarData()
+            {
+                CalculatedAtUtc = data.CalculatedAtUtc,
+                DescendingSortedItems = data.DescendingSortedItems.Take(limit)
+            };
+        }
         return Task.FromResult<CalculatedMakelaarData?>(data);
     }
 }

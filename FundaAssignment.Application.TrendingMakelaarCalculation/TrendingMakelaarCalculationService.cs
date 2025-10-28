@@ -26,7 +26,7 @@ public class TrendingMakelaarCalculationService
     {
         foreach (var searchTerm in filterConfig.FilterSearchTerms)
         {
-            var data = await calculatedResultStore.GetCalculatedDataAsync(searchTerm);
+            var data = await calculatedResultStore.GetCalculatedDataAsync(searchTerm, 0);
             if (data is null 
                 || DateTime.UtcNow.Subtract(data.CalculatedAtUtc) > calculationConfig.RefreshInterval)
             {
