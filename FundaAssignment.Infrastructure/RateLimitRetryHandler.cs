@@ -4,6 +4,11 @@ using Microsoft.Extensions.Options;
 
 namespace FundaAssignment.Infrastructure;
 
+// Missing AI Prompt: for commit 47b78198fc32c4b1a2e38f06dc72861248095149 the prompt was as following
+// "Add DelegatingHandler for FundaApiClient that would handle RateLimited response by introducing a delay configured via appsettings and calling an API again after a delay"
+// "Extend background processing logic with backoff retry mechanism. Emit logs when processors throws. Make backoff retry configurable."
+
+
 // This handler could go to Funda.Common.Http (or similar) if needed elsewhere,
 // for now it has a specific quirk from FundaAPI to interpret 401 as rate limited
 public class RateLimitRetryHandler : DelegatingHandler

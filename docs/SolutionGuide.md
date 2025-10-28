@@ -64,3 +64,6 @@ Open Swagger UI at `http://localhost:5136/swagger`.
 ## Security Notes
 - Filters are allowlisted; results are served from memory; no dynamic DB queries in this solution.
 
+## AI Usage Notes
+- AI usage is documented in commit messages. If a commit message does not include “AI Prompt,” AI was not used for that change. Some commits are fully AI‑generated; most combine AI suggestions with manual edits.
+- One commit lacks the AI usage note: 47b78198fc32c4b1a2e38f06dc72861248095149. See `FundaAssignment.Infrastructure/RateLimitRetryHandler.cs` for the exact AI prompt.
