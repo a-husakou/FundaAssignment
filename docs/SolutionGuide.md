@@ -1,15 +1,15 @@
 # Funda Assignment – Solution Guide
 
-See also: [AssignmentAnalysis.md](docs/AssignmentAnalysis.md) for the original analysis.
+See also: [AssignmentAnalysis.md](./AssignmentAnalysis.md) for the original analysis.
 
 ## Solution Structure
-The main solution follows a Clean Architecture organization (`/src` folder) and includes the following projects:
+The main solution follows a Clean Architecture organization (`/src` solution folder) and includes the following projects:
 - `FundaAssignment.TrendingMakelaarApi` – ASP.NET Core Web API host (controllers, startup).
 - `FundaAssignment.Application.Common` – shared contracts and configuration types (e.g., `FilterConfig`, result DTOs).
 - `FundaAssignment.Application.TrendingMakelaarCalculation` – pulls listings, aggregates per makelaar, stores sorted results.
 - `FundaAssignment.Infrastructure` – implementation of application interfaces that do not relate to application concerns, as well as wiring up background processing and warmup.
 
-More generic primitives that are reusable across a wider set of applications are placed in the `/external` folder.
+More generic primitives that are reusable across a wider set of applications are placed in the `/external` solution folder.
 This split is only made to extract generic logic out of the main solution and is not intended to be comprehensive.
 It has a single project, `Funda.Common`, with the following functionality:
 - Background processor scheduler. Executes on a fixed interval and can perform an initialization run. This is intentionally interval-only to cover the assignment scenario.
@@ -20,7 +20,7 @@ It has a single project, `Funda.Common`, with the following functionality:
 - Complete the logic to address needs for a wider group of applications (e.g., cron-like schedules, pluggable backoff policies, health/readiness abstractions).
 - Add tests covering the `Funda.Common` components.
 
-API‑level tests are added in the `/test` folder. Smaller‑scope tests are omitted as there are no complicated business rules.
+API‑level tests are added in the `/test` solution folder. Smaller‑scope tests are omitted as there are no complicated business rules.
 
 ## How It Works
 - Background service runs on a schedule (`Interval`) and optionally once at startup (`PerformInitializationRun`).
